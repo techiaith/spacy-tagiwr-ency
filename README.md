@@ -1,6 +1,9 @@
 ENGLISH BELOW
 
 # Tagiwr Rhannau Ymadrodd Arbrofol Dwyieithog Cymraeg a Saesneg
+
+[Gweler yma am y ffeiliau](https://github.com/techiaith/spacy-tagiwr-ency/releases/tag/22.10)
+
 Dyma dagiwr **arbrofol** sy'n gallu tagio rhannau ymadrodd testunau Cymraeg a Saesneg o fewn llyfrgell Python 'spaCy'. 
 
 Ysgogiad yr arbrawf hwn oedd y gallai modelau dwyieithog fod yn ddefnyddiol iawn yn y cyd-destun Cymreig gan fod y gall y ddwy iaith ymddangos ochr yn ochr neu'n gymysg yn ei gilydd (yn enwedig fel enwau, teitlau a dyfyniadau).
