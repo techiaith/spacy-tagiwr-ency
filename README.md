@@ -52,7 +52,7 @@ nlp = spacy.load("ency_bi_model")
 y ffordd hawsaf yw gosod ffolder y model yn yr un cyfeiriadur ¾a'ch ffeil.
 
 ```
-nlp = spacy.load("ency_bi_model")
+nlp = spacy.load(path/to/model)
 ```
 
 # Enghreifftiau Defnydd
@@ -105,17 +105,200 @@ Noder mai arfer bwriadol CCG yw trin berfenwau fel 'syllu' fel enwau yn htrach n
 ## Enghreifftiau Eraill
 
 ```
-xxx
+The DT DET the
+cat NN NOUN cat
+sat VBD VERB sit
+on IN ADP on
+the DT DET the
+mat NN NOUN mat
+and CC CCONJ and
+closed VBD VERB close
+her PRP$ DET -PRON-
+eyes NNS NOUN eye
 ```
 
 ```
-xxx
+Eisteddodd verb VERB Eisteddodd
+y art DET y
+gath noun NOUN gath
+ar prep ADP ar
+y art DET y
+mat noun NOUN mat
+a cconj CCONJ a
+chau noun NOUN chau
+ei dep PRON ei
+llygaid noun NOUN llygaid
+```
+
+### Trin ffurf amwys fel 'plant' (to plant, a plant, y plant (=children))
+```
+plant NN NOUN plant
+growing VBG VERB grow
+for IN ADP for
+begginers NNS NOUN begginer
 ```
 
 ```
-xxx
+I PRP PRON -PRON-
+will MD VERB will
+plant VB VERB plant
+many JJ ADJ many
+trees NNS NOUN tree
 ```
+
+```
+mae'r verb VERB mae'r
+plant noun NOUN plant
+yn pred PART yn
+tyfu'n verbnoun NOUN tyfu'n
+gyflym pos ADJ gyflym
+```
+
+Diolchwn i Lywodraeth Cymru am ariannu'r gwaith hwn.
 
 # Experimental Bilingual Part-of-Speech Tagger for English and Welsh
 
 [See here for the files](https://github.com/techiaith/spacy-tagiwr-ency/releases/tag/22.10)
+
+This is an **experimental** tagger that can tag parts of speech in Welsh and English texts within the Python library 'spaCy'.
+
+The impetus for this experiment was that bilingual models could be very useful in the Welsh context, as the two languages often appear in the same documents in Wales (especially as names, titles and quotations).
+
+This model was trained by combining English Universal Dependencies data [English Web Treebank](https://universaldependencies.org/treebanks/en_ewt/index.html) (EWT) with Welsh data [Corpws Cystrawenol y Gymraeg](https://universaldependencies .org/treebanks/cy_ccg/index.html) (CCG). We are grateful to thei authors for making the data available under an open license.
+
+953 Welsh training sentences from the CCG and 614 Welsh testing sentences were used as development sentences. For the English element, 12,543 training sentences and 2007 test sentences from the EWT corpus were used as development sentences.
+
+The tagging accuracy reported following the training process was **92.7%** on the test set.
+
+Because the testing data and the training data are made up of mixed Welsh and English sentences, we are unable to break that figure down by language. We intend to carry out an additional evaluation with new test data to analyze the accuracy of a bilingual model both in Welsh and English separately. From training individual English and Welsh models on the same data, the accuracy was 93% for the English language and 90% for the Welsh language. We expect that the figure per language for the bilingual model will be lower than 92.7% within general use, with a tendency towards English as there is more English data available than Welsh data. Nevertheless, an initial analysis of the results of the bilingual model is extremely promising. See the [Usage Examples](usage-examples) section below for examples.
+
+## Installing spaCy
+
+To use the tagger, spaCy must first be installed. We currently recommend installing version 2.3.2 as we have not yet caught up with the significant changes to the library in version 3 (we intend to update the Welsh components and submit them to spaCy's creators before the end of March 2023).
+
+You can install spaCy as follows:
+
+## Installing the language pack
+A specific bilingual language pack with the language code `ency' was created for the English and Welsh language combination. To install, the `ency.zip` file found in this repository under the Releases menu must be unzipped and the `ency` folder placed within the spaCy `lang` folder in your Python environment. Here is an example of its location in a Python 3.10 environment:
+
+```
+.env/lib/python3.10/site-packages/spacy/lang/ency
+```
+
+The `ency' language folder contains an extended tag map that adds the Welsh xpos tags of the US CCG corpus to the tags of the English corpus. Since the xpos tags are different for the two languages but the UPOS tags differ, it is possible to analyze to which language the model has assigned each token from its xpos, while maintaining cross-linguistic consistency through the UPOS.
+
+We have not yet included Welsh lemmatization in the model, so the model currently has no pnd lemmas for tickets that have been tagged with an English xpos tag.
+
+## Installing the model
+After downloading and unzipping the model file, which is `ency_bi_model.zip`, you can install the model anywhere on your system, as long as you set the appropriate path to it when loading it in your Python code:
+
+```
+nlp = spacy.load(path/to/model)
+```
+
+the easiest way is to place the model folder in the same directory as your file, and then use:
+
+```
+nlp = spacy.load("ency_bi_model")
+```
+
+# Usage Examples
+
+```
+import spacy
+
+nlp = spacy.load("ency_bi_model")
+
+text = "Dywedodd wrthi 'Don't do that, you might get hurt', ond dim ond syllu arni a wnaeth hi."
+
+doc = nlp(text)
+
+for token in doc:
+    print (token.text, token.tag_, token.pos_, token.lemma_)
+```
+
+Output:
+
+(geirffurf, xpos, upos, lema os Saesneg)
+
+```
+Dywedodd verb VERB Dywedodd
+wrthi cprep ADP wrthi
+' `` PUNCT '
+Do VBP AUX do
+n't RB PART not
+do VB AUX do
+that DT DET that
+, , PUNCT ,
+you PRP PRON -PRON-
+might MD VERB may
+get VB AUX get
+hurt VBN VERB hurt
+' '' PUNCT '
+, , PUNCT ,
+ond cconj CCONJ ond
+dim noun NOUN dim
+ond cconj CCONJ ond
+syllu verbnoun NOUN syllu
+arni cprep ADP arni
+a rel PRON a
+wnaeth verb VERB wnaeth
+hi indep PRON hi
+. punct PUNCT .
+```
+
+Note that CCG deliberately treats verbnouns such as 'syllu' as nouns rather than verbs, even when they are verbal in nature. Whilst this is one valid interpretation, it may be unfamiliar to many who are used to conceptualizing verbnouns as verbs. This tagger has inherited this behaviour from the corpus.
+
+## Other Examples
+
+```
+The DT DET the
+cat NN NOUN cat
+sat VBD VERB sit
+on IN ADP on
+the DT DET the
+mat NN NOUN mat
+and CC CCONJ and
+closed VBD VERB close
+her PRP$ DET -PRON-
+eyes NNS NOUN eye
+```
+
+```
+Eisteddodd verb VERB Eisteddodd
+y art DET y
+gath noun NOUN gath
+ar prep ADP ar
+y art DET y
+mat noun NOUN mat
+a cconj CCONJ a
+chau noun NOUN chau
+ei dep PRON ei
+llygaid noun NOUN llygaid
+```
+
+### Dealing with the ambiguity of 'plant' (to plant, a plant, y plant (=children))
+```
+plant NN NOUN plant
+growing VBG VERB grow
+for IN ADP for
+begginers NNS NOUN begginer
+```
+
+```
+I PRP PRON -PRON-
+will MD VERB will
+plant VB VERB plant
+many JJ ADJ many
+trees NNS NOUN tree
+```
+
+```
+mae'r verb VERB mae'r
+plant noun NOUN plant
+yn pred PART yn
+tyfu'n verbnoun NOUN tyfu'n
+gyflym pos ADJ gyflym
+```
+
+We thank the Welsh Government for financing this work.
