@@ -6,15 +6,15 @@
 
 Dyma dagiwr **arbrofol** sy'n gallu tagio rhannau ymadrodd testunau Cymraeg a Saesneg o fewn llyfrgell Python 'spaCy'. 
 
-Ysgogiad yr arbrawf hwn oedd y gallai modelau dwyieithog fod yn ddefnyddiol iawn yn y cyd-destun Cymreig gan fod y gall y ddwy iaith ymddangos ochr yn ochr neu'n gymysg yn ei gilydd (yn enwedig fel enwau, teitlau a dyfyniadau).
+Ysgogiad yr arbrawf hwn oedd y gallai modelau dwyieithog fod yn ddefnyddiol iawn yn y cyd-destun Cymreig gan fod y ddwy iaith yn ymddangos ochr yn ochr neu'n gymysg yn ei gilydd yn aml (yn enwedig fel enwau, teitlau a dyfyniadau).
 
-Hyfforddwyd y model hwn drwy gyfuno data Universal Dependencies Saesneg [English Web Treebank](https://universaldependencies.org/treebanks/en_ewt/index.html) (EWT) gyda data Cymraeg [Corpws Cystrawennol y Gymraeg](https://universaldependencies.org/treebanks/cy_ccg/index.html) (CCG). Rydym yn ddiolchgar i am roi'r data ar gael o dan drwydded agored.
+Hyfforddwyd y model hwn drwy gyfuno data Universal Dependencies Saesneg [English Web Treebank](https://universaldependencies.org/treebanks/en_ewt/index.html) (EWT) gyda data Cymraeg [Corpws Cystrawennol y Gymraeg](https://universaldependencies.org/treebanks/cy_ccg/index.html) (CCG). Rydym yn ddiolchgar i awduron yr EWT a'r CCG am roi'r data ar gael o dan drwydded agored.
 
-Defnyddwyd 953 brawddeg hyfforddi Gymraeg o'r CC, a 614 brawddeg brofi Gymraeg fel brawddegau datblygu. Ar gyfer yr elfen Saesneg, defnyddwyd 12,543 brawddeg hyfforddi o'r EWT, a 2007 brawddeg brofi fel brawddegau datblygu.
+Defnyddiwyd 953 brawddeg hyfforddi Gymraeg o'r CCG, a 614 brawddeg brofi Gymraeg fel brawddegau datblygu. Ar gyfer yr elfen Saesneg, defnyddiwyd 12,543 brawddeg hyfforddi o'r EWT, a 2007 brawddeg brofi fel brawddegau datblygu.
 
 Y cywirdeb tagio a adroddwyd yn dilyn y broses hyfforddi oedd **92.7%** ar y set brofi.
 
-Oherwydd bod y data profi a'r data hyfforddi wedi'u ffurfio o frawddegau cymysg Cymraeg a Saesneg, nid oes modd inni dorri'r ffigwr hwnnw i lawr fesul iaith. Bwriadwn gynnal gwerthusiad ychwanegol gyda data profi newydd i ddadansoddi cywirdeb model dwyieithog gyd'ar Gymraeg a'r Saesneg ar wahân. O hyfforddi modelau unigol Saesneg a Chymraeg ar yr un data, roedd y cywirdeb yn 93% ar gfyer y Saesneg a 90% ar gyfer y Gymraeg. Disgwyliwn y bydd y ffigwr fesul iaith ar gyfer y model dwyieithog yn is na 92.7% o fewn defnydd cyffredinol, gyda thuedd tuag at y Saesneg gan fod mwy o ddata Saesneg ar gael na data Cymraeg. Serch hynny, mae dadansoddiad cychwynnol o ganlyniadau'r model dwyieithog yn hynod o addawol. Gweler yr adran [Enghreifftiau Defnydd](enghreifftiau-defnydd) isod am enghreifftiau.
+Oherwydd bod y data profi a'r data hyfforddi wedi'u ffurfio o frawddegau cymysg Cymraeg a Saesneg, nid oes modd inni dorri'r ffigwr hwnnw i lawr fesul iaith. Bwriadwn gynnal gwerthusiad ychwanegol gyda data profi newydd i ddadansoddi cywirdeb model dwyieithog gyda'r Gymraeg a'r Saesneg ar wahân. O hyfforddi modelau unigol Saesneg a Chymraeg ar yr un data, roedd y cywirdeb yn 93% ar gyfer y Saesneg a 90% ar gyfer y Gymraeg. Disgwyliwn y bydd y ffigwr fesul iaith ar gyfer y model dwyieithog yn is na 92.7% o fewn defnydd cyffredinol, gyda thuedd tuag at y Saesneg gan fod mwy o ddata Saesneg ar gael na data Cymraeg. Serch hynny, mae dadansoddiad cychwynnol o ganlyniadau'r model dwyieithog yn hynod o addawol. Gweler yr adran [Enghreifftiau Defnydd](#enghreifftiau-defnydd) isod am enghreifftiau.
 
 ## Gosod spaCy
 
@@ -38,18 +38,18 @@ Crewyd pecyn iaith dwyieithog penodol ar gyfer y cyfuniad Saesneg a Chymraeg gyd
 .env/lib/python3.10/site-packages/spacy/lang/ency
 ```
 
-Mae'r ffolder iaith `ency` yn cynnwys map tagiau estynedig sy'n ychwanegu tagiau xpos Cymraeg y corpws UD CCG at dagiau'r corpws Saesneg. Gan fod y tagiau xpos yn wahanol rhwng y ddwy iaith, ond bod y tagiau UPOS yn cyfateb, mae modd dadansoddi i ba iaith mae'r model wedi priodoli pob tocyn o'i xpos, tra'n cynnal cysondeb trawsieithol trwy'r UPOS.
+Mae'r ffolder iaith `ency` yn cynnwys map tagiau estynedig sy'n ychwanegu tagiau XPOS Cymraeg y corpws UD CCG at dagiau'r corpws Saesneg. Gan fod y tagiau xpos yn wahanol rhwng y ddwy iaith, ond bod y tagiau UPOS yn cyfateb, mae modd dadansoddi i ba iaith mae'r model wedi priodoli pob tocyn o'i XPOS, tra'n cynnal cysondeb trawsieithol trwy'r UPOS.
 
-Nid ydym eto wedi cynnwys lemateiddio Cymraeg yn y model, felly dim pnd lemau ar gyfer tocynnau sydd wedi eu tagio gyda thag xpos Saesneg sydd gan y model ar hyn o bryd.
+Nid ydym eto wedi cynnwys lemateiddio Cymraeg yn y model, felly dim ond lemau ar gyfer tocynnau sydd wedi eu tagio gyda thag XPOS Saesneg sydd gan y model ar hyn o bryd.
 
 ## Gosod y model
-Ar ôl lawrlwytho a dadsipio ffeil y model, sef XXX, gallwch ei osod y model unrhyw le ar eich system, dim ond eich bod yn gosod y llwybr priodol ato wrth ei lwytho yn eich cod Python:
+Ar ôl lawrlwytho a dadzipio ffeil y model, sef `ency_bi_model.zip`, gallwch osod y model, sef `ency_bi_model` unrhyw le ar eich system, dim ond eich bod yn gosod y llwybr priodol ato wrth ei lwytho yn eich cod Python:
 
 ```
 nlp = spacy.load("ency_bi_model")
 ```
 
-y ffordd hawsaf yw gosod ffolder y model yn yr un cyfeiriadur ¾a'ch ffeil.
+y ffordd hawsaf yw gosod ffolder y model yn yr un cyfeiriadur a'ch ffeil.
 
 ```
 nlp = spacy.load(path/to/model)
@@ -72,7 +72,7 @@ for token in doc:
 
 Allbwn:
 
-(geirffurf, xpos, upos, lema os Saesneg)
+(geirffurf, XPOS, UPOS, lema os Saesneg)
 
 ```
 Dywedodd verb VERB Dywedodd
@@ -100,7 +100,7 @@ hi indep PRON hi
 . punct PUNCT .
 ```
 
-Noder mai arfer bwriadol CCG yw trin berfenwau fel 'syllu' fel enwau yn htrach na berfenau, hyd yn oed pan fônt yn ymddwyn yn fwy berfol. Mae hyn yn un dehongliad dilys o'r berfenw, ond gall fod yn arfer dieithr i rai sydd wedi arfer trin berfenwau berfol fel berfau. Mae'r tagiwr hwn wedi etifeddu'r arfer hwnnw o'r corpws.
+Noder mai arfer bwriadol CCG yw trin berfenwau fel 'syllu' fel enwau yn htrach na berfenwau, hyd yn oed pan fônt yn ymddwyn yn fwy berfol. Mae hyn yn un dehongliad dilys o'r berfenw, ond gall fod yn arfer dieithr i rai sydd wedi arfer trin berfenwau berfol fel berfau. Mae'r tagiwr hwn wedi etifeddu'r arfer hwnnw o'r corpws.
 
 ## Enghreifftiau Eraill
 
@@ -164,13 +164,13 @@ This is an **experimental** tagger that can tag parts of speech in Welsh and Eng
 
 The impetus for this experiment was that bilingual models could be very useful in the Welsh context, as the two languages often appear in the same documents in Wales (especially as names, titles and quotations).
 
-This model was trained by combining English Universal Dependencies data [English Web Treebank](https://universaldependencies.org/treebanks/en_ewt/index.html) (EWT) with Welsh data [Corpws Cystrawenol y Gymraeg](https://universaldependencies .org/treebanks/cy_ccg/index.html) (CCG). We are grateful to thei authors for making the data available under an open license.
+This model was trained by combining English Universal Dependencies data [English Web Treebank](https://universaldependencies.org/treebanks/en_ewt/index.html) (EWT) with Welsh data [Corpws Cystrawenol y Gymraeg](https://universaldependencies .org/treebanks/cy_ccg/index.html) (CCG). We are grateful to their authors for making the data available under an open license.
 
 953 Welsh training sentences from the CCG and 614 Welsh testing sentences were used as development sentences. For the English element, 12,543 training sentences and 2007 test sentences from the EWT corpus were used as development sentences.
 
 The tagging accuracy reported following the training process was **92.7%** on the test set.
 
-Because the testing data and the training data are made up of mixed Welsh and English sentences, we are unable to break that figure down by language. We intend to carry out an additional evaluation with new test data to analyze the accuracy of a bilingual model both in Welsh and English separately. From training individual English and Welsh models on the same data, the accuracy was 93% for the English language and 90% for the Welsh language. We expect that the figure per language for the bilingual model will be lower than 92.7% within general use, with a tendency towards English as there is more English data available than Welsh data. Nevertheless, an initial analysis of the results of the bilingual model is extremely promising. See the [Usage Examples](usage-examples) section below for examples.
+Because the testing data and the training data are made up of mixed Welsh and English sentences, we are unable to break that figure down by language. We intend to carry out an additional evaluation with new test data to analyze the accuracy of a bilingual model both in Welsh and English separately. From training individual English and Welsh models on the same data, the accuracy was 93% for the English language and 90% for the Welsh language. We expect that the figure per language for the bilingual model will be lower than 92.7% within general use, with a tendency towards English as there is more English data available than Welsh data. Nevertheless, an initial analysis of the results of the bilingual model is extremely promising. See the [Usage Examples](#usage-examples) section below for examples.
 
 ## Installing spaCy
 
@@ -178,19 +178,28 @@ To use the tagger, spaCy must first be installed. We currently recommend install
 
 You can install spaCy as follows:
 
+```
+python -m venv .env
+source .env/bin/activate
+pip install -U pip setuptools wheel
+pip install -U spacy==2.3.2
+```
+
+See https://v2.spacy.io/ for more info regarding spaCy v2.
+
 ## Installing the language pack
-A specific bilingual language pack with the language code `ency' was created for the English and Welsh language combination. To install, the `ency.zip` file found in this repository under the Releases menu must be unzipped and the `ency` folder placed within the spaCy `lang` folder in your Python environment. Here is an example of its location in a Python 3.10 environment:
+A specific bilingual language pack with the language code `ency` was created for the English and Welsh language combination. To install, the `ency.zip` file found in this repository under the Releases menu must be unzipped and the `ency` folder placed within the spaCy `lang` folder in your Python environment. Here is an example of its location in a Python 3.10 environment:
 
 ```
 .env/lib/python3.10/site-packages/spacy/lang/ency
 ```
 
-The `ency' language folder contains an extended tag map that adds the Welsh xpos tags of the US CCG corpus to the tags of the English corpus. Since the xpos tags are different for the two languages but the UPOS tags differ, it is possible to analyze to which language the model has assigned each token from its xpos, while maintaining cross-linguistic consistency through the UPOS.
+The `ency` language folder contains an extended tag map that adds the Welsh XPOS tags of the UD CCG corpus to the tags of the English corpus. Since the XPOS tags are different for the two languages but the UPOS tags don't, it is possible to analyze to which language the model has assigned each token from its XPOS, while maintaining cross-linguistic consistency through the UPOS.
 
-We have not yet included Welsh lemmatization in the model, so the model currently has no pnd lemmas for tickets that have been tagged with an English xpos tag.
+We have not yet included Welsh lemmatization in the model, so the model currently has no lemmas for tokens that have been tagged with an English XPOS tag.
 
 ## Installing the model
-After downloading and unzipping the model file, which is `ency_bi_model.zip`, you can install the model anywhere on your system, as long as you set the appropriate path to it when loading it in your Python code:
+After downloading and unzipping the model file, `ency_bi_model.zip`, you can install the model, `ency_bi_model`, anywhere on your system, as long as you set the appropriate path to it when loading it in your Python code:
 
 ```
 nlp = spacy.load(path/to/model)
@@ -219,7 +228,7 @@ for token in doc:
 
 Output:
 
-(geirffurf, xpos, upos, lema os Saesneg)
+(wordform, XPOS, UPOS, lemma if English)
 
 ```
 Dywedodd verb VERB Dywedodd
