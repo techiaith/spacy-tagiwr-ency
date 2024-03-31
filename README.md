@@ -18,7 +18,7 @@ Oherwydd bod y data profi a'r data hyfforddi wedi'u ffurfio o frawddegau cymysg 
 
 ## Gosod spaCy
 
-I ddefnyddio'r tagiwr, rhaid yn gyntaf gosod spaCy. Argymhellwn osod fersiwn 2.3.2 am y tro gan nad ydym eto wedi dal i fyny gyda'r newidiadau sylweddol i'r llyfrgell yn fersiwn 3 (mae'n fwriad gennym ddiweddaru'r cydrannau Cymraeg a'u trosglwyddo i ddarparwyr spaCy cyn diwedd Mawrth 2023). 
+I ddefnyddio'r tagiwr, rhaid yn gyntaf gosod spaCy. Argymhellwn osod fersiwn 2.3.9 am y tro gan nad ydym eto wedi dal i fyny gyda'r newidiadau sylweddol i'r llyfrgell yn fersiwn 3 (mae'n fwriad gennym ddiweddaru'r cydrannau Cymraeg a'u trosglwyddo i ddarparwyr spaCy). 
 
 Gallwch ei osod fel a ganlyn:
 
@@ -26,7 +26,7 @@ Gallwch ei osod fel a ganlyn:
 python -m venv .env
 source .env/bin/activate
 pip install -U pip setuptools wheel
-pip install -U spacy==2.3.2
+pip install -U spacy==2.3.9
 ```
 
 Gweler https://v2.spacy.io/ am fwy o fanylion am spaCy v2.
@@ -174,7 +174,7 @@ Because the testing data and the training data are made up of mixed Welsh and En
 
 ## Installing spaCy
 
-To use the tagger, spaCy must first be installed. We currently recommend installing version 2.3.2 as we have not yet caught up with the significant changes to the library in version 3 (we intend to update the Welsh components and submit them to spaCy's creators before the end of March 2023).
+To use the tagger, spaCy must first be installed. We currently recommend installing version 2.3.9 as we have not yet caught up with the significant changes to the library in version 3 (we intend to update the Welsh components and submit them to spaCy's creators).
 
 You can install spaCy as follows:
 
@@ -182,7 +182,7 @@ You can install spaCy as follows:
 python -m venv .env
 source .env/bin/activate
 pip install -U pip setuptools wheel
-pip install -U spacy==2.3.2
+pip install -U spacy==2.3.9
 ```
 
 See https://v2.spacy.io/ for more info regarding spaCy v2.
