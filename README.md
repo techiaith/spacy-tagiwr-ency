@@ -154,6 +154,96 @@ tyfu'n verbnoun NOUN tyfu'n
 gyflym pos ADJ gyflym
 ```
 
+## Creu Priodoledd 'lang' i ddynodi iaith y tocyn
+
+Er mwyn hwyluso mynediad at y dadansoddiad cystrawenol o iaith y tocyn, gellir creu a defnyddio priodoledd gyfaddas ar gyfer nodi'r iaith.
+
+Mae'r cod canlynol yn rhoi'r iaith (un ai 'cy' am Gymraeg neu 'en' am Saesneg) ar gael ar y gwrthrych tocyn fel a ganlyn: `token._.lang`
+
+```
+import spacy
+from spacy.tokens import Token
+
+def get_lang(token):
+    cy_xposes = {'noun': {'POS': 'NOUN'},
+                'prep': {'POS': 'ADP'},
+                'art': {'POS': 'DET'},
+                'pos': {'POS': 'ADJ'},
+                'rel': {'POS': 'PRON'},
+                'verb': {'POS': 'VERB'},
+                'pred': {'POS': 'PART'},
+                'place': {'POS': 'PROPN'},
+                'punct': {'POS': 'PUNCT'},
+                'cconj': {'POS': 'CCONJ'},
+                'aux': {'POS': 'AUX'},
+                'dem': {'POS': 'PRON'},
+                'dep': {'POS': 'PRON'},
+                'impf': {'POS': 'AUX'},
+                'verbnoun': {'POS': 'NOUN'},
+                'adv': {'POS': 'ADV'},
+                'cprep': {'POS': 'ADP'},
+                'sym': {'POS': 'SYM'},
+                'sconj': {'POS': 'SCONJ'},
+                'cmp': {'POS': 'ADJ'},
+                'person': {'POS': 'PROPN'},
+                'refl': {'POS': 'PRON'},
+                'num': {'POS': 'NUM'},
+                'ante': {'POS': 'AUX'},
+                'indep': {'POS': 'PRON'},
+                'aff': {'POS': 'PART'},
+                'neg': {'POS': 'PART'},
+                'sup': {'POS': 'ADJ'},
+                'eq': {'POS': 'ADJ'},
+                'ord': {'POS': 'ADJ'},
+                'pron': {'POS': 'PRON'},
+                'work': {'POS': 'PROPN'},
+                'int': {'POS': 'PART'},
+                'post': {'POS': 'AUX'},
+                'org': {'POS': 'PROPN'},
+                'card': {'POS': 'NUM'},
+                'intr': {'POS': 'PRON'},
+                'contr': {'POS': 'PRON'},
+                'event': {'POS': 'PROPN'}
+                }
+    en_xposes = {".",",","-LRB-","-RRB-","``",'""',"''",":","$",
+                 "#","AFX","CC","CD","DT","EX","FW","HYPH","IN",
+                 "JJ","JJR","JJS","LS","MD","NIL","NN","NNP",
+                 "NNPS","NNS","PDT","POS","PRP","PRP$","RB","RBR",
+                 "RBS","RP","SP","SYM","TO","UH","VB","VBD","VBG",
+                 "VBN","VBP","VBZ","WDT","WP","WP$","WRB","ADD",
+                 "NFP","GW","XX","BES","HVS", "_SP"}
+    if token.tag_ in cy_xposes:
+        return "cy"
+    elif token.tag_ in en_xposes:
+        return "en"
+    else:
+        return "unknown"
+
+Token.set_extension("lang", getter=get_lang, force=True)
+
+doc = nlp("The car drove over the plant. Aeth y plant am dro yn y car.")
+[(t.text, t._.lang) for t in doc]
+
+# CANLYNIAD/RESULT
+# [('The', 'en'),
+#  ('car', 'en'),
+#  ('drove', 'en'),
+#  ('over', 'en'),
+#  ('the', 'en'),
+#  ('plant', 'en'),
+#  ('.', 'cy'),
+#  ('Aeth', 'cy'),
+#  ('y', 'cy'),
+#  ('plant', 'cy'),
+#  ('am', 'cy'),
+#  ('dro', 'cy'),
+#  ('yn', 'cy'),
+#  ('y', 'cy'),
+#  ('car', 'cy'),
+#  ('.', 'cy')]
+```
+Sylwer fod yr uchod yn gweithio ar sail dadansoddiad cystrawenol o rannau ymadrodd tocynnau'r brawddegau, ac y gellir felly ei ddefnyddio yn ogystal neu yn hytrach na dulliau ystadegol ar sail llythrennau'r tocyn (fel cld2 a cld3, er enghraifft). 
+
 Diolchwn i Lywodraeth Cymru am ariannu'r gwaith hwn.
 
 # Experimental Bilingual Part-of-Speech Tagger for English and Welsh
@@ -309,5 +399,95 @@ yn pred PART yn
 tyfu'n verbnoun NOUN tyfu'n
 gyflym pos ADJ gyflym
 ```
+
+## Creating a'lang' attribute to indicate a token's language
+
+To facilitate access to a syntactical analysis of the token's language, a custom attribute can be created to indicated the language.
+
+The following code provides the language (either as 'cy' for Welsh or 'en' for English) on the token object, as follows: `token._.lang`
+
+```
+import spacy
+from spacy.tokens import Token
+
+def get_lang(token):
+    cy_xposes = {'noun': {'POS': 'NOUN'},
+                'prep': {'POS': 'ADP'},
+                'art': {'POS': 'DET'},
+                'pos': {'POS': 'ADJ'},
+                'rel': {'POS': 'PRON'},
+                'verb': {'POS': 'VERB'},
+                'pred': {'POS': 'PART'},
+                'place': {'POS': 'PROPN'},
+                'punct': {'POS': 'PUNCT'},
+                'cconj': {'POS': 'CCONJ'},
+                'aux': {'POS': 'AUX'},
+                'dem': {'POS': 'PRON'},
+                'dep': {'POS': 'PRON'},
+                'impf': {'POS': 'AUX'},
+                'verbnoun': {'POS': 'NOUN'},
+                'adv': {'POS': 'ADV'},
+                'cprep': {'POS': 'ADP'},
+                'sym': {'POS': 'SYM'},
+                'sconj': {'POS': 'SCONJ'},
+                'cmp': {'POS': 'ADJ'},
+                'person': {'POS': 'PROPN'},
+                'refl': {'POS': 'PRON'},
+                'num': {'POS': 'NUM'},
+                'ante': {'POS': 'AUX'},
+                'indep': {'POS': 'PRON'},
+                'aff': {'POS': 'PART'},
+                'neg': {'POS': 'PART'},
+                'sup': {'POS': 'ADJ'},
+                'eq': {'POS': 'ADJ'},
+                'ord': {'POS': 'ADJ'},
+                'pron': {'POS': 'PRON'},
+                'work': {'POS': 'PROPN'},
+                'int': {'POS': 'PART'},
+                'post': {'POS': 'AUX'},
+                'org': {'POS': 'PROPN'},
+                'card': {'POS': 'NUM'},
+                'intr': {'POS': 'PRON'},
+                'contr': {'POS': 'PRON'},
+                'event': {'POS': 'PROPN'}
+                }
+    en_xposes = {".",",","-LRB-","-RRB-","``",'""',"''",":","$",
+                 "#","AFX","CC","CD","DT","EX","FW","HYPH","IN",
+                 "JJ","JJR","JJS","LS","MD","NIL","NN","NNP",
+                 "NNPS","NNS","PDT","POS","PRP","PRP$","RB","RBR",
+                 "RBS","RP","SP","SYM","TO","UH","VB","VBD","VBG",
+                 "VBN","VBP","VBZ","WDT","WP","WP$","WRB","ADD",
+                 "NFP","GW","XX","BES","HVS", "_SP"}
+    if token.tag_ in cy_xposes:
+        return "cy"
+    elif token.tag_ in en_xposes:
+        return "en"
+    else:
+        return "unknown"
+
+Token.set_extension("lang", getter=get_lang, force=True)
+
+doc = nlp("The car drove over the plant. Aeth y plant am dro yn y car.")
+print ([(t.text, t._.lang) for t in doc])
+
+# CANLYNIAD/RESULT
+# [('The', 'en'),
+#  ('car', 'en'),
+#  ('drove', 'en'),
+#  ('over', 'en'),
+#  ('the', 'en'),
+#  ('plant', 'en'),
+#  ('.', 'cy'),
+#  ('Aeth', 'cy'),
+#  ('y', 'cy'),
+#  ('plant', 'cy'),
+#  ('am', 'cy'),
+#  ('dro', 'cy'),
+#  ('yn', 'cy'),
+#  ('y', 'cy'),
+#  ('car', 'cy'),
+#  ('.', 'cy')]
+```
+Note that the above works on the basis of a syntactical analysis of the sentences's tokens, and can therefore be used in place of or in conjunction of statistical analyses based on the letters occuring in texts (as in cld2 and cld3, for example). 
 
 We thank the Welsh Government for financing this work.
